@@ -1,3 +1,5 @@
+import enum
+
 WIDTH = 1920
 HEIGHT = 1080
 FPS = 60
@@ -24,3 +26,11 @@ class Colours:
     BUTTON_HOVER = (119, 161, 154)
     TEXT_SUBTITLE = (191, 191, 191)
     TEXT_LIGHT = (223, 235, 234)
+
+
+class TileType(enum.Enum):
+    NULL = '.'
+    START = 'S'
+    PATH = '#'
+    PLACEABLE = 'P'
+    KING = 'K'
