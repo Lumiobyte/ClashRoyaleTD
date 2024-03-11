@@ -23,8 +23,8 @@ def main():
     clock = pygame.time.Clock()
     frame_time = 0
 
-    tiles = pygame.sprite.Group()
-    tiles.add(worlds.Tile(TileType.START, pygame.Vector2(800, 800)))
+    game_map = None
+
 
     while True:
         for event in pygame.event.get():
@@ -37,18 +37,38 @@ def main():
                     pygame.quit()
                     sys.exit()
 
+            if event.type == MOUSEBUTTONDOWN:
+                if game_map:
+                    game_map.pan_viewport(pygame.Vector2(pygame.mouse.get_pos()))
+                else:
+                    game_map = worlds.load_map(worlds.get_offline_map_list()[0])
 
         # Update
 
-        tiles.update()
+        if game_map:
+            game_map.update()
 
         # Draw
-
         screen.fill(Colours.BLACK)
 
-        tiles.draw(screen)
+        if game_map:
+            game_map.render(screen)
 
-        ui.write(screen, ui.TextSize.MEDIUM, Colours.WHITE, (500, 500), "game", True)
+        pygame.draw.rect(screen, Colours.PANEL_DARKGREY, pygame.Rect(1550, 0, 370, 1080))
+
+        if game_map:
+            ui.write(screen, ui.TextSize.LARGE_BOLD, Colours.WHITE, (1580, 100), "Defenses", False)
+
+            pygame.draw.rect(screen, Colours.LIGHT_GREEN, pygame.Rect(1580, 220, 80, 80))
+            pygame.draw.rect(screen, Colours.LIGHT_GREEN, pygame.Rect(1580, 400, 80, 80))
+            pygame.draw.rect(screen, Colours.LIGHT_GREEN, pygame.Rect(1700, 220, 80, 80))
+            pygame.draw.rect(screen, Colours.LIGHT_GREEN, pygame.Rect(1700, 400, 80, 80))
+
+
+            ui.write(screen, ui.TextSize.MEDIUM, Colours.WHITE, (1560, 900), "Click to pan map", False)
+        else:
+            ui.write(screen, ui.TextSize.MEDIUM, Colours.WHITE, (1560, 900), "Click to load map 'basic'", False)
+
 
         pygame.display.flip()
         frame_time = clock.tick(FPS)

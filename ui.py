@@ -1,11 +1,10 @@
 import pygame
 
 
-def write(screen, font, colour, location, text, centered = False):
-
+def write(screen, font, colour, location, text, centered=False):
     if centered:
         text_render = font.render(text, True, colour)
-        screen.blit(text_render, text_render.get_rect(center = location))
+        screen.blit(text_render, text_render.get_rect(center=location))
     else:
         screen.blit(font.render(text, True, colour), location)
 

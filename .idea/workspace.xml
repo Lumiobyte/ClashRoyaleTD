@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/assets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/satisfaction.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/save/maps/basic/map.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/save/maps/basic/metadata.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/save/maps/basic/stats.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/save/maps/default_thumb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/worlds.py" afterDir="false" />
+    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="Progress on world loading code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets.py" beforeDir="false" afterPath="$PROJECT_DIR$/assets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save/maps/basic/stats.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/worlds.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,12 +98,21 @@
       <option name="project" value="LOCAL" />
       <updated>1709084103860</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Progress on world loading code">
+      <option name="closed" value="true" />
+      <created>1709281739510</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709281739510</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Progress on world loading code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Progress on world loading code" />
   </component>
 </project>
