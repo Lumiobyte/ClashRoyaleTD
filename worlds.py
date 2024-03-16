@@ -6,6 +6,7 @@ import json
 
 from constants import *
 
+
 # Notes
 # Gridcoordinate class would be useful - support methods like getabove, getbelow, check surrounds etc
 # Enums or constants for possible zoom levels e.g. 2, 1, 0.8, etc
@@ -15,7 +16,6 @@ from constants import *
 
 class MapMeta:
     def __init__(self, name, author, size, path, editable):
-
         self.thumb = None
         self.name = name
         self.author = author
@@ -78,7 +78,8 @@ def load_map(map_meta):
         lines = [line.strip('\n') for line in map_data.readlines()]
 
         # Beware [[v]*n]*n
-        map_tiles = [[None] * map_meta.size[0] for i in range(map_meta.size[1])]
+        # map_tiles = [[None] * map_meta.size[0] for i in range(map_meta.size[1])] # Access is [y][x]
+        map_tiles = [[None] * map_meta.size[1] for i in range(map_meta.size[0])]  # Access is [x][y]
         paths = []
         start = None
         king = None
@@ -88,32 +89,34 @@ def load_map(map_meta):
         if not len(lines) == map_meta.size[1]:
             return "Map is formatted incorrectly!"
 
-
         for row, line in enumerate(lines):
             if not len(line) == map_meta.size[0]:
                 return "Map is formatted incorrectly!"
 
             for col, char in enumerate(line):
+
+                tile_pos = (col, row)  # x, y
+
                 if char not in valid_chars:
                     return "Map contains invalid tiles!"
 
                 tile_type = TileType(char)
 
                 if tile_type == TileType.PATH:
-                    paths.append((row, col))
+                    paths.append(tile_pos)
                 elif tile_type == TileType.START:
                     if start is None:
-                        start = (row, col)
+                        start = tile_pos
                     else:
                         return "There are too many start tiles in the map!"
                 elif tile_type == TileType.KING:
                     if king is None:
-                        king = (row, col)
+                        king = tile_pos
                     else:
                         return "There are too many king tiles in the map!"
 
-                new_tile = Tile(tile_type, (row, col))
-                map_tiles[row][col] = new_tile
+                new_tile = Tile(tile_type, tile_pos)
+                map_tiles[col][row] = new_tile
 
     map = Map(map_meta, map_tiles, paths, start, king)
     return map
@@ -129,7 +132,6 @@ class Tile(pygame.sprite.Sprite):
         self.grid_loc = grid_loc
 
     def update_pos(self, viewport_pos):
-
         tile_pos = (
             viewport_pos.x + self.rect.width * self.grid_loc[0],
             viewport_pos.y + self.rect.height * self.grid_loc[1]

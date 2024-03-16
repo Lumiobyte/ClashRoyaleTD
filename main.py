@@ -43,16 +43,17 @@ def main():
                 else:
                     game_map = worlds.load_map(worlds.get_offline_map_list()[0])
 
+                print(pygame.mouse.get_pos())
+                print(pygame.mouse.get_rel())
+
         # Update
 
-        if game_map:
-            game_map.update()
+        game_map.update()
 
         # Draw
         screen.fill(Colours.BLACK)
 
-        if game_map:
-            game_map.render(screen)
+        game_map.render(screen)
 
         pygame.draw.rect(screen, Colours.PANEL_DARKGREY, pygame.Rect(1550, 0, 370, 1080))
 
