@@ -4,12 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="Stage 1 Prototype">
-      <change afterPath="$PROJECT_DIR$/save/maps/basic/stats.json" afterDir="false" />
+    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="Fix map being flipped during loading">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/evanp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/text/infobox_knight.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/state.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/drivers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/menu_bp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/menus.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/util.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets.py" beforeDir="false" afterPath="$PROJECT_DIR$/assets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/satisfaction.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/auto/image/satisfaction.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/save/maps/basic/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/save/maps/basic/map.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/save/maps/basic/metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/save/maps/basic/metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/worlds.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,12 +29,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Stub" />
+        <option value="Python Unit Test" />
         <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -41,15 +55,26 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python.assets.executor&quot;: &quot;Run&quot;,
+    &quot;Python.drivers.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/evanp/Downloads/one-dark-theme-5.10.0.zip&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\evanp\OneDrive\Documents\Coding\Python\PYCHARM\ClashRoyaleTD\menus" />
+      <recent name="C:\Users\evanp\OneDrive\Documents\Coding\Python\PYCHARM\ClashRoyaleTD\assets\auto" />
+      <recent name="C:\Users\evanp\OneDrive\Documents\Coding\Python\PYCHARM\ClashRoyaleTD" />
+      <recent name="C:\Users\evanp\OneDrive\Documents\Coding\Python\PYCHARM\ClashRoyaleTD\ui" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="ClashRoyaleTD" />
@@ -114,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710133046810</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix map being flipped during loading">
+      <option name="closed" value="true" />
+      <created>1710575745601</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710575745601</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -122,6 +155,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Progress on world loading code" />
     <MESSAGE value="Stage 1 Prototype" />
-    <option name="LAST_COMMIT_MESSAGE" value="Stage 1 Prototype" />
+    <MESSAGE value="Fix map being flipped during loading" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix map being flipped during loading" />
   </component>
 </project>

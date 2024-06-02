@@ -5,14 +5,13 @@ import os
 import json
 
 from constants import *
+from classes import *
 
 
 # Notes
 # Gridcoordinate class would be useful - support methods like getabove, getbelow, check surrounds etc
 # Enums or constants for possible zoom levels e.g. 2, 1, 0.8, etc
 # Culling so that tiles where top left is outside the viewport area are not rendered at all.
-# Don't use vectors - not really meant to be used like this. Instead grab my old point class
-# Moving the viewport is called PANNING - update language used
 
 class MapMeta:
     def __init__(self, name, author, size, path, editable):
@@ -27,7 +26,7 @@ class MapMeta:
         self.thumb = new_thumb
 
 
-# Paths will need to be based on some OS base path or something
+# TODO: Paths will need to be based on some OS base path or something
 # https://stackoverflow.com/questions/56639952/what-does-pathlib-path-cwd-return
 
 def get_offline_map_list():
@@ -118,8 +117,8 @@ def load_map(map_meta):
                 new_tile = Tile(tile_type, tile_pos)
                 map_tiles[col][row] = new_tile
 
-    map = Map(map_meta, map_tiles, paths, start, king)
-    return map
+    final_map = Map(map_meta, map_tiles, paths, start, king)
+    return final_map
 
 
 class Tile(pygame.sprite.Sprite):
@@ -160,12 +159,12 @@ class Map:
         self.start_loc = start_loc
         self.king_loc = king_loc
 
-        self.viewport_topleft: pygame.math.Vector2
-        self.zoom: int
-
         # Allow default viewport loc & zoom to be passed
-        self.pan_viewport(pygame.math.Vector2(0, 0))
-        self.zoom_viewport(1)
+        self.viewport_topleft = Point(0, 0)
+        self.zoom = 1
+
+        self.pan_viewport(self.viewport_topleft)
+        self.zoom_viewport(self.zoom)
 
         self.viewport_area = pygame.Rect(0, 0, WIDTH - 500, HEIGHT)
 

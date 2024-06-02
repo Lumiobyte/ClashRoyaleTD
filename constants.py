@@ -1,4 +1,10 @@
 import enum
+import os
+import pygame
+
+ROOT_DIR = os.path.split(os.path.abspath(__file__))[0]  # Path to the root folder of the game files
+ASSETS_DIR = os.path.join(ROOT_DIR, 'assets')
+DATA_DIR = os.path.join(ROOT_DIR, 'save')
 
 WIDTH = 1920
 HEIGHT = 1080
@@ -26,6 +32,17 @@ class Colours:
     BUTTON_HOVER = (119, 161, 154)
     TEXT_SUBTITLE = (191, 191, 191)
     TEXT_LIGHT = (223, 235, 234)
+    TEXT_DARK = ()
+
+
+class TextSize:
+    TINY = pygame.font.Font("./assets/fonts/segoe/segoe-ui.ttf", 16)
+    SMALL = pygame.font.Font("./assets/fonts/segoe/segoe-ui.ttf", 24)
+    SMALL_BOLD = pygame.font.Font("./assets/fonts/segoe/segoe-ui-bold.ttf", 24)
+    MEDIUM = pygame.font.Font("./assets/fonts/segoe/segoe-ui.ttf", 32)
+    LARGE = pygame.font.Font("./assets/fonts/segoe/segoe-ui.ttf", 32)
+    MED_BOLD = pygame.font.Font("./assets/fonts/segoe/segoe-ui-bold.ttf", 48)
+    LARGE_BOLD = pygame.font.Font("./assets/fonts/segoe/segoe-ui-bold.ttf", 64)
 
 
 class TileType(enum.Enum):
