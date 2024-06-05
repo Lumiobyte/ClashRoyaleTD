@@ -3,12 +3,15 @@ import os
 import pygame
 
 ROOT_DIR = os.path.split(os.path.abspath(__file__))[0]  # Path to the root folder of the game files
-ASSETS_DIR = os.path.join(ROOT_DIR, 'assets')
-DATA_DIR = os.path.join(ROOT_DIR, 'save')
+ASSETS_DIR = os.path.join(ROOT_DIR, 'assets/')
+DATA_DIR = os.path.join(ROOT_DIR, 'save/')
 
 WIDTH = 1920
 HEIGHT = 1080
 FPS = 60
+
+H_CENTER = 960
+V_CENTER = 540
 
 
 class Colours:

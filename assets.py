@@ -1,7 +1,7 @@
 import pygame
 import glob
 import os
-from constants import Colours, TileType
+from constants import *
 from classes import Point
 
 
@@ -28,7 +28,7 @@ sound_ext = ('.wav', '.ogg', '.mp3')
 
 
 class AssetManager:
-    def __init__(self, path="./assets/auto/"):
+    def __init__(self, path=ASSETS_DIR+"auto/"):
         self.path = path
         self.assets = {}
 

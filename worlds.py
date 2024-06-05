@@ -32,7 +32,7 @@ class MapMeta:
 def get_offline_map_list():
     offline_maps = []
 
-    for root, dirs, files in os.walk("./save/maps/"):
+    for root, dirs, files in os.walk(DATA_DIR+"maps/"):
 
         if len(files) < 1:
             continue
@@ -57,7 +57,7 @@ def get_offline_map_list():
                 continue
 
         if 'thumb.png' not in files:
-            map_meta.set_thumb(pygame.image.load('./save/maps/default_thumb.png').convert_alpha())
+            map_meta.set_thumb(pygame.image.load(DATA_DIR+'/maps/default_thumb.png').convert_alpha())
         else:
             map_meta.set_thumb(pygame.image.load(root + '/thumb.png').convert_alpha())
 
