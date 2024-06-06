@@ -4,14 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="Menu architecture implemented">
-      <change afterPath="$PROJECT_DIR$/gameview.py" afterDir="false" />
+    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="State stack is now used properly to enter game view.">
+      <change afterPath="$PROJECT_DIR$/misc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic2/map.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic2/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic2/stats.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic3/map.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic3/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic3/stats.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic4/map.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic4/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic4/stats.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic5/map.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic5/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic5/stats.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/menu_bp.py.disabled" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets.py" beforeDir="false" afterPath="$PROJECT_DIR$/assets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameview.py" beforeDir="false" afterPath="$PROJECT_DIR$/gameview.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/state.py" beforeDir="false" afterPath="$PROJECT_DIR$/state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save/maps/default_thumb.png" beforeDir="false" afterPath="$PROJECT_DIR$/save/maps/default_thumb.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/menu_bp.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/menus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/util.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/worlds.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,21 +60,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.assets.executor&quot;: &quot;Run&quot;,
-    &quot;Python.drivers.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/evanp/Downloads/one-dark-theme-5.10.0.zip&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.assets.executor": "Run",
+    "Python.drivers.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/evanp/Downloads/one-dark-theme-5.10.0.zip",
+    "settings.editor.selected.configurable": "editor.preferences.tabs"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\evanp\OneDrive\Documents\Coding\Python\PYCHARM\ClashRoyaleTD" />
@@ -148,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717318145204</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="State stack is now used properly to enter game view.">
+      <option name="closed" value="true" />
+      <created>1717590701001</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1717590701001</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -158,6 +181,7 @@
     <MESSAGE value="Stage 1 Prototype" />
     <MESSAGE value="Fix map being flipped during loading" />
     <MESSAGE value="Menu architecture implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Menu architecture implemented" />
+    <MESSAGE value="State stack is now used properly to enter game view." />
+    <option name="LAST_COMMIT_MESSAGE" value="State stack is now used properly to enter game view." />
   </component>
 </project>
