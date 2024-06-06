@@ -1,0 +1,27 @@
+# Menu boilerplate code
+
+class MapSelectMenu(state.State):
+    def _init__(self, crtd):
+        state.State.__init__(self, crtd)
+
+        self.buttons = [
+
+        ]
+
+    def update(self, delta_time, events):
+
+        clicked = False
+        for event in events:
+            pass
+
+        self.process_buttons(pygame.mouse.get_pos(), clicked)
+
+    def process_buttons(self, pos, clicked):
+
+        for button in self.buttons:
+            button.check(pos, clicked)
+
+    def render(self, delta_time, surface):
+
+        for button in self.buttons:
+            button.render(surface, delta_time)

@@ -28,24 +28,31 @@ class Colours:
     LIGHT_BROWN = (217, 192, 104)
 
     # UI Colours
+    ACCENT = (119, 161, 154)
+
     PANEL_DARKGREY = (33, 33, 33)
+
     INFOBOX_GREY = (41, 41, 41)
     INFOBOX_BORDER = (119, 161, 154)
+
     BUTTON = (220, 242, 239)
-    BUTTON_HOVER = (119, 161, 154)
+    BUTTON_HOVER = ACCENT
+
     TEXT_SUBTITLE = (191, 191, 191)
     TEXT_LIGHT = (223, 235, 234)
     TEXT_DARK = ()
 
 
 class TextSize:
-    TINY = pygame.font.Font("./assets/fonts/segoe/segoe-ui.ttf", 16)
-    SMALL = pygame.font.Font("./assets/fonts/segoe/segoe-ui.ttf", 24)
-    SMALL_BOLD = pygame.font.Font("./assets/fonts/segoe/segoe-ui-bold.ttf", 24)
-    MEDIUM = pygame.font.Font("./assets/fonts/segoe/segoe-ui.ttf", 32)
-    LARGE = pygame.font.Font("./assets/fonts/segoe/segoe-ui.ttf", 32)
-    MED_BOLD = pygame.font.Font("./assets/fonts/segoe/segoe-ui-bold.ttf", 48)
-    LARGE_BOLD = pygame.font.Font("./assets/fonts/segoe/segoe-ui-bold.ttf", 64)
+    TINY = pygame.font.Font(ASSETS_DIR + "fonts/segoe/segoe-ui.ttf", 16)
+    SMALL = pygame.font.Font(ASSETS_DIR + "fonts/segoe/segoe-ui.ttf", 24)
+    SMALL_BOLD = pygame.font.Font(ASSETS_DIR + "fonts/segoe/segoe-ui-bold.ttf", 24)
+    MINOR_BOLD = pygame.font.Font(ASSETS_DIR + "fonts/segoe/segoe-ui-bold.ttf", 28)
+    MEDIUM = pygame.font.Font(ASSETS_DIR + "fonts/segoe/segoe-ui.ttf", 32)
+    LARGE = pygame.font.Font(ASSETS_DIR + "fonts/segoe/segoe-ui.ttf", 32)
+    MED_BOLD = pygame.font.Font(ASSETS_DIR + "fonts/segoe/segoe-ui-bold.ttf", 48)
+    LARGE_BOLD = pygame.font.Font(ASSETS_DIR + "fonts/segoe/segoe-ui-bold.ttf", 64)
+    MEGA_BOLD = pygame.font.Font(ASSETS_DIR + "fonts/segoe/segoe-ui-bold.ttf", 80)
 
 
 class TileType(enum.Enum):

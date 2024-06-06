@@ -9,10 +9,10 @@ from classes import *
 
 
 class TestGameView(state.State):
-    def __init__(self, game):
+    def __init__(self, game, map_meta):
         state.State.__init__(self, game)
 
-        self.game_map = worlds.load_map(worlds.get_offline_map_list()[0])
+        self.game_map = worlds.load_map(map_meta)
 
     def update(self, delta_time, events):
         for event in events:

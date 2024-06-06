@@ -69,8 +69,9 @@ class Crtd:
         else:
             pass
 
+        util.write(self.screen, util.TextSize.TINY, Colours.WHITE, (10, 1060), str(round(self.clock.get_fps(), 1)))
+
         pygame.display.flip()
-        print(self.state_stack)
 
         # Tick and get frame time
         self.frame_time = self.clock.tick(FPS)

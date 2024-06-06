@@ -39,11 +39,13 @@ class ButtonType(enum.Enum):
     CHECKBOX = enum.auto()
 
 
+# TODO: Allow buttons to be disabled and not clickable
 class Button:
     def __init__(self, button_type: ButtonType, pos: Point, size: Point, title: pygame.Surface, colours: list,
                  images: list | None, actions: list):
 
         # TODO: Support auto button size: size set to None, automatically set size based on text
+        # TODO: Fix or remove checkboxes?
 
         self.button_type = button_type
         self.pos = pos  # x, y of center
@@ -59,7 +61,7 @@ class Button:
         self.button_rect = pygame.Rect((self.pos.x - self.size.x / 2), (self.pos.y - self.size.y / 2), self.size.x,
                                        self.size.y)
 
-    def check(self, mouse_pos: tuple, clicked):
+    def check(self, mouse_pos: tuple, clicked, action_args=None):
 
         if self.images:
             current_image = self.images[{True: 1, False: 0}[self.hovered]]
@@ -74,7 +76,7 @@ class Button:
 
             if clicked:
                 for i, action in enumerate(self.actions):
-                    if self.button_type == ButtonType.CHECKBOX and i == 0:  # Checkbox specific logic
+                    if self.button_type == ButtonType.CHECKBOX and i == 0:  # Checkbox specific logic - Do not use
                         result = action()
                         if result:
                             self.title = TextSize.SMALL_BOLD.render("X", True, Colours.BLACK)
@@ -86,7 +88,10 @@ class Button:
                     else:
 
                         # TODO: Return results from action functions
-                        action()
+                        if action_args:
+                            action(*action_args)
+                        else:
+                            action()
 
                 return True
 
@@ -125,6 +130,12 @@ class Button:
 
     def update_theme(self, new_theme):
         self.colours = new_theme
+
+    def update_pos(self, new_pos):
+        self.pos = new_pos
+
+    def update_size(self, new_size):
+        self.size = new_size
 
     def darken_colour(self, colour):
         return colour[0] - 40, colour[1] - 40, colour[2] - 40

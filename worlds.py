@@ -73,6 +73,9 @@ def load_map(map_meta):
     :return: Map
     """
 
+    # TODO: Need to ensure that there are no dead ends on the map. Only two ends are start and king
+    # Easiest way is to just disallow any path tile from having more than two adjacent path tiles. Prevents branches
+
     with open(map_meta.path + "/map.txt") as map_data:
         lines = [line.strip('\n') for line in map_data.readlines()]
 
