@@ -57,6 +57,7 @@ class Button:
 
         self.auto_size = False
         self.hovered = False
+        self.disabled = False
 
         self.button_rect = pygame.Rect((self.pos.x - self.size.x / 2), (self.pos.y - self.size.y / 2), self.size.x,
                                        self.size.y)
@@ -71,7 +72,7 @@ class Button:
         else:
             collide_rect = self.button_rect
 
-        if collide_rect.collidepoint(mouse_pos):
+        if collide_rect.collidepoint(mouse_pos) and not self.disabled:
             self.hovered = True
 
             if clicked:
@@ -104,9 +105,8 @@ class Button:
         else:
             pygame.draw.rect(screen, self.colours[0] if not self.hovered else self.colours[1], self.button_rect)
 
-        if self.button_type == ButtonType.CHECKBOX:
-            # Probably very expensive and has performance impact but. oh, well!
-            # Interior colour also does not account for the main colour being totally black
+        if self.button_type == ButtonType.CHECKBOX: # Currently deprecated
+            # Interior colour does not account for the main colour being totally black
             top_offset = self.size.y / 8
             left_offset = self.size.x / 8
             interior_rect = pygame.Rect(self.button_rect.left + left_offset, self.button_rect.top + top_offset,
@@ -117,6 +117,18 @@ class Button:
 
         if self.title:
             screen.blit(self.title, self.title.get_rect(center=(self.pos.x, self.pos.y)))
+
+        if self.disabled:
+            if self.images:
+                pass  # TODO: Implement disabled grey-out for image buttons
+            else:
+                pygame.draw.rect(screen, self.colours[0] if not self.hovered else self.colours[1], self.button_rect)
+
+                # Using a second surface so it can be drawn with transparency, creating greyed-out effect
+                disabled_effect = pygame.Surface((self.button_rect.width, self.button_rect.height))
+                disabled_effect.set_alpha(128)
+                disabled_effect.fill(Colours.BLACK)
+                disabled_effect.blit(screen, (self.button_rect.left, self.button_rect.top))
 
         self.hovered = False
 

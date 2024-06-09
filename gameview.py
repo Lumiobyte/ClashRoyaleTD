@@ -51,3 +51,47 @@ class TestGameView(state.State):
         else:
             util.write(surface, util.TextSize.MEDIUM, Colours.WHITE, (1560, 900), "Click to load map 'basic'",
                        False)
+
+
+class EditorView(state.State):
+    def __init__(self, game, map_meta):
+        state.State.__init__(self, game)
+
+        self.game_map = worlds.load_map(map_meta)
+
+        self.buttons = [
+            util.Button(util.ButtonType.NORMAL, Point(160, 1005), Point(150, 80),
+                        util.TextSize.MINOR_BOLD.render("BACK", True, Colours.BLACK),
+                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state])  # Pause button
+        ]
+
+    def update(self, delta_time, events):
+
+        clicked = False
+        for event in events:
+            if event.type == MOUSEBUTTONDOWN:
+                clicked = True
+                # Process click and drag for panning
+
+            if event.type == KEYDOWN:
+                if event.key == K_PLUS:
+                    pass  # Processs zoom in
+                if event.key == K_MINUS:
+                    pass  # Process zoom out
+
+        for button in self.buttons:
+            button.check(pygame.mouse.get_pos(), clicked)
+
+    def render(self, delta_time, surface):
+
+        surface.fill(Colours.BLACK)
+
+        self.game_map.render(surface)
+
+        # Side Panel
+        pygame.draw.rect(surface, Colours.ACCENT, pygame.Rect(1540, 0, 370, 1080))
+        pygame.draw.rect(surface, Colours.PANEL_DARKGREY, pygame.Rect(1550, 0, 370, 1080))
+
+        # Buttons
+        for button in self.buttons:
+            button.render(surface, delta_time)

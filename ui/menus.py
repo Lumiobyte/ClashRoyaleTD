@@ -64,11 +64,15 @@ class MapSelectMenu(state.State):
         self.buttons = [
             util.Button(util.ButtonType.NORMAL, Point(160, 1005), Point(150, 80),
                         util.TextSize.MINOR_BOLD.render("BACK", True, Colours.BLACK),
-                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state])  # Back button
+                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state]),  # Back button
+            util.Button(util.ButtonType.NORMAL, Point(160, 1005), Point(150, 80),
+                        util.TextSize.MINOR_BOLD.render("GET MAPS", True, Colours.BLACK),
+                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state])  # Download maps button
         ]
 
         # Buttons which need special processing are checked separately
         self.play_button = util.Button(util.ButtonType.NORMAL, Point(1760, 1005), Point(150, 80), util.TextSize.MINOR_BOLD.render("PLAY", True, Colours.BLACK), [Colours.BUTTON, Colours.BUTTON_HOVER], None, [])
+        self.edit_button = util.Button(util.ButtonType.NORMAL, Point(1560, 1005), Point(150, 80), util.TextSize.MINOR_BOLD.render("EDIT", True, Colours.BLACK), [Colours.BUTTON, Colours.BUTTON_HOVER], None, [])
 
         self.offline_maps = worlds.get_offline_map_list()
 
@@ -94,14 +98,14 @@ class MapSelectMenu(state.State):
         for event in events:
 
             if event.type == MOUSEWHEEL:
-                mult = math.exp(abs(event.precise_y) / 4)  # misc.para_multiplier(abs(event.precise_y), 0, 2)
+                mult = math.exp(abs(event.precise_y) / 3)  # misc.para_multiplier(abs(event.precise_y), 0, 2)
                 self.scroll_offset = misc.clamp(self.scroll_offset + (10 * -event.precise_y * mult), 0, self.scroll_limit)
+
                 self.generate_map_card_rects()
                 self.set_scrollbar_rect()
 
             elif event.type == MOUSEBUTTONDOWN:
                 clicked = True
-
 
         # Mouse interaction for map cards
         map_hovered = False
@@ -121,9 +125,11 @@ class MapSelectMenu(state.State):
         for button in self.buttons:
             button.check(pygame.mouse.get_pos(), clicked)
 
-        if self.play_button.check(pygame.mouse.get_pos(), clicked):
-            if self.selected_index is not None:
+        if self.selected_index is not None:
+            if self.play_button.check(pygame.mouse.get_pos(), clicked):
                 gameview.TestGameView(self.crtd, self.offline_maps[self.selected_index]).enter_state()
+            if self.edit_button.check(pygame.mouse.get_pos(), clicked) and self.offline_maps[self.selected_index].editable:
+                gameview.EditorView(self.crtd, self.offline_maps[self.selected_index]).enter_state()
 
         if self.scrollbar_grabbed:
             if pygame.mouse.get_pressed()[0]:
@@ -151,10 +157,11 @@ class MapSelectMenu(state.State):
 
             card_rects.append(pygame.Rect(card_corner_x, card_corner_y, 500, 400))  # Card size is 500 x 400
 
-            current_corner_y += (450 * (i % 2))  # Only increment every second card - two cards per row
+            if i < num_cards - 1: # Do not increment if this is the last card
+                current_corner_y += (450 * (i % 2))  # Only increment every second card - two cards per row
 
         self.map_card_rects = card_rects
-        self.scroll_limit = current_corner_y - 400 # This will probably allow too much at the bottom if there are two cards on last row
+        self.scroll_limit = current_corner_y - 200
 
 
     def calculate_scrollbar_scaling(self):
@@ -217,3 +224,8 @@ class MapSelectMenu(state.State):
             button.render(surface, delta_time)
 
         self.play_button.render(surface, delta_time)
+
+        if self.selected_index:
+            self.edit_button.disabled = not self.offline_maps[self.selected_index].editable
+
+        self.edit_button.render(surface, delta_time)
