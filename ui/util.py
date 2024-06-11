@@ -55,12 +55,18 @@ class Button:
         self.images = images  # [Default IMG, Hovered IMG] or None if not used
         self.actions = actions  # List of functions
 
+        self.preset_args = []  # List of preset arguments to be passed to actions
+
         self.auto_size = False
         self.hovered = False
         self.disabled = False
 
         self.button_rect = pygame.Rect((self.pos.x - self.size.x / 2), (self.pos.y - self.size.y / 2), self.size.x,
                                        self.size.y)
+
+    def setup_args(self, preset_args):
+        self.preset_args = preset_args
+        return self
 
     def check(self, mouse_pos: tuple, clicked, action_args=None):
 
@@ -91,6 +97,8 @@ class Button:
                         # TODO: Return results from action functions
                         if action_args:
                             action(*action_args)
+                        elif self.preset_args:
+                            action(*self.preset_args)
                         else:
                             action()
 
@@ -122,13 +130,15 @@ class Button:
             if self.images:
                 pass  # TODO: Implement disabled grey-out for image buttons
             else:
-                pygame.draw.rect(screen, self.colours[0] if not self.hovered else self.colours[1], self.button_rect)
+                pygame.draw.rect(screen, Colours.RED, self.button_rect)
 
                 # Using a second surface so it can be drawn with transparency, creating greyed-out effect
                 disabled_effect = pygame.Surface((self.button_rect.width, self.button_rect.height))
-                disabled_effect.set_alpha(128)
-                disabled_effect.fill(Colours.BLACK)
+                disabled_effect.set_alpha(64)
+                disabled_effect.fill(Colours.RED)
                 disabled_effect.blit(screen, (self.button_rect.left, self.button_rect.top))
+
+                # TODO: Grey-out is not working
 
         self.hovered = False
 

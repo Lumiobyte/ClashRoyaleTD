@@ -65,7 +65,7 @@ class MapSelectMenu(state.State):
             util.Button(util.ButtonType.NORMAL, Point(160, 1005), Point(150, 80),
                         util.TextSize.MINOR_BOLD.render("BACK", True, Colours.BLACK),
                         [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state]),  # Back button
-            util.Button(util.ButtonType.NORMAL, Point(160, 1005), Point(150, 80),
+            util.Button(util.ButtonType.NORMAL, Point(H_CENTER, 1005), Point(190, 80),
                         util.TextSize.MINOR_BOLD.render("GET MAPS", True, Colours.BLACK),
                         [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state])  # Download maps button
         ]
@@ -95,6 +95,7 @@ class MapSelectMenu(state.State):
 
         # Iterate events
         clicked = False
+        mouse_pos = pygame.mouse.get_pos()
         for event in events:
 
             if event.type == MOUSEWHEEL:
@@ -110,7 +111,7 @@ class MapSelectMenu(state.State):
         # Mouse interaction for map cards
         map_hovered = False
         for i, card_rect in enumerate(self.map_card_rects):
-            if card_rect.collidepoint(pygame.mouse.get_pos()):
+            if (160 < mouse_pos[1] < 920) and card_rect.collidepoint(mouse_pos):
                 self.hovered_index = i
                 if clicked:
                     self.selected_index = i
@@ -123,12 +124,12 @@ class MapSelectMenu(state.State):
 
         # Check buttons
         for button in self.buttons:
-            button.check(pygame.mouse.get_pos(), clicked)
+            button.check(mouse_pos, clicked)
 
         if self.selected_index is not None:
-            if self.play_button.check(pygame.mouse.get_pos(), clicked):
+            if self.play_button.check(mouse_pos, clicked):
                 gameview.TestGameView(self.crtd, self.offline_maps[self.selected_index]).enter_state()
-            if self.edit_button.check(pygame.mouse.get_pos(), clicked) and self.offline_maps[self.selected_index].editable:
+            if self.edit_button.check(mouse_pos, clicked) and self.offline_maps[self.selected_index].editable:
                 gameview.EditorView(self.crtd, self.offline_maps[self.selected_index]).enter_state()
 
         if self.scrollbar_grabbed:
@@ -139,7 +140,7 @@ class MapSelectMenu(state.State):
             else:
                 self.scrollbar_grabbed = False
 
-        if self.scrollbar_rect.collidepoint(pygame.mouse.get_pos()) and clicked:
+        if self.scrollbar_rect.collidepoint(mouse_pos) and clicked:
             self.scrollbar_grabbed = True
             pygame.mouse.get_rel()  # Prime get_rel so that scrollbar won't jump next frame
 
@@ -194,9 +195,6 @@ class MapSelectMenu(state.State):
             util.write(surface, TextSize.MINOR_BOLD, Colours.BLACK, (card_rect.left + 20, card_rect.top + 310), meta.name)
             util.write(surface, TextSize.SMALL, Colours.BLACK, (card_rect.left + 20, card_rect.top + 350), "by " + meta.author)
 
-            # TODO: Disable edit map button if map is not editable
-
-
     def render(self, delta_time, surface):
 
         surface.fill(Colours.BLACK)
@@ -225,7 +223,9 @@ class MapSelectMenu(state.State):
 
         self.play_button.render(surface, delta_time)
 
-        if self.selected_index:
+        if self.selected_index is not None:
             self.edit_button.disabled = not self.offline_maps[self.selected_index].editable
 
-        self.edit_button.render(surface, delta_time)
+            self.edit_button.render(surface, delta_time)
+
+            # TODO: Should render some symbol on the map card if it has origin=online

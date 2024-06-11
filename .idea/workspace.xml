@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="Map select menu almost complete">
+    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="Progress on level editor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameview.py" beforeDir="false" afterPath="$PROJECT_DIR$/gameview.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/misc.py" beforeDir="false" afterPath="$PROJECT_DIR$/misc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/save/maps/basic2/metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/save/maps/basic2/metadata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/menus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/worlds.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,8 +170,27 @@
       <option name="project" value="LOCAL" />
       <updated>1717673023068</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Progress on level editor">
+      <option name="closed" value="true" />
+      <created>1717929955913</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1717929955914</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -183,6 +201,7 @@
     <MESSAGE value="Menu architecture implemented" />
     <MESSAGE value="State stack is now used properly to enter game view." />
     <MESSAGE value="Map select menu almost complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="Map select menu almost complete" />
+    <MESSAGE value="Progress on level editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Progress on level editor" />
   </component>
 </project>

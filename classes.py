@@ -44,6 +44,12 @@ class Point:
     def tuple(self):
         return self.x, self.y
 
+    def abs(self):
+        return Point(abs(self.x), abs(self.y))
+
+    def dist(self, other):
+        return math.sqrt((other.x - self.x)**2 + (other.y - self.y)**2)
+
 
 @dataclass
 class GridCoordinate(Point):
