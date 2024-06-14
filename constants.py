@@ -57,8 +57,12 @@ class TextSize:
 
 
 class TileType(enum.Enum):
-    NULL = '.'
-    START = 'S'
-    PATH = '#'
-    PLACEABLE = 'P'
-    KING = 'K'
+    NULL = enum.auto()
+    START = enum.auto()
+    PATH = enum.auto()
+    PLACEABLE = enum.auto()
+    KING = enum.auto()
+
+
+tile_types = {'.': TileType.NULL, 'S': TileType.START, '#': TileType.PATH, 'P': TileType.PLACEABLE, 'K': TileType.KING}
+

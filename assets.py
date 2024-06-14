@@ -5,24 +5,6 @@ from constants import *
 from classes import Point
 
 
-def get_tile_asset(tile_type):
-
-    image = pygame.Surface((80, 80))
-
-    if tile_type == TileType.START:
-        image.fill(Colours.RED)
-    elif tile_type == TileType.PATH:
-        image.fill(Colours.LIGHT_YELLOW)
-    elif tile_type == TileType.PLACEABLE:
-        image.fill(Colours.LIGHT_GREEN)
-    elif tile_type == TileType.KING:
-        image.fill(Colours.BLUE)
-    elif tile_type == TileType.NULL:
-        image.fill(Colours.LIGHT_GRAY)
-
-    return image
-
-
 image_ext = ('.png', '.jpg')
 sound_ext = ('.wav', '.ogg', '.mp3')
 
@@ -50,7 +32,6 @@ class AssetManager:
                     loaded_asset = self.load_string(filepath)
 
                 if loaded_asset:
-                    self.assets.update()
                     self.assets[folder][file[0:-4]] = loaded_asset
                     # TODO: define top level dict before adding assets to it or keyerror
 
@@ -62,7 +43,26 @@ class AssetManager:
         return lines
 
     def get(self, asset):
-        return self.assets[asset.split('.')]  # For example image.logo or sound.click
+        asset_list = asset.split('.')  # For example image.logo or sound.click
+
+        if len(asset_list) == 1:
+            return self.assets[asset_list[0]]
+        elif len(asset_list) == 2:
+            return self.assets[asset_list[0]][asset_list[1]]
+
+    def get_tile_asset(self, tile_type):
+
+        if tile_type == TileType.START:
+            return self.assets['image']['start'].image
+        elif tile_type == TileType.PATH:
+            return self.assets['image']['path'].image
+        elif tile_type == TileType.PLACEABLE:
+            return self.assets['image']['placeable'].image
+        elif tile_type == TileType.KING:
+            return self.assets['image']['king'].image
+        elif tile_type == TileType.NULL:
+            return self.assets['image']['empty'].image
+
 
 
 class Image:

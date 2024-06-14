@@ -41,7 +41,7 @@ class ButtonType(enum.Enum):
 
 # TODO: Allow buttons to be disabled and not clickable
 class Button:
-    def __init__(self, button_type: ButtonType, pos: Point, size: Point, title: pygame.Surface, colours: list,
+    def __init__(self, button_type: ButtonType, pos: Point, size: Point, title: pygame.Surface | None, colours: list,
                  images: list | None, actions: list):
 
         # TODO: Support auto button size: size set to None, automatically set size based on text
