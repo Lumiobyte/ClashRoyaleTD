@@ -4,17 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="Level editor map rendering, panning, tile highlight, tool selector">
-      <change afterPath="$PROJECT_DIR$/save/maps/tiny/map.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/save/maps/tiny/metadata.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/save/maps/tiny/stats.json" afterDir="false" />
+    <list default="true" id="632c650e-f086-4c3e-ac57-246d552041a9" name="Changes" comment="Level editor tools implemented, added tile assets">
+      <change afterPath="$PROJECT_DIR$/save/maps/basic/thumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic2/thumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic3/thumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic4/thumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/basic5/thumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save/maps/tiny/thumb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/infoboxes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets.py" beforeDir="false" afterPath="$PROJECT_DIR$/assets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/auto/image/satisfaction.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameview.py" beforeDir="false" afterPath="$PROJECT_DIR$/gameview.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/drivers.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/drivers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save/maps/basic2/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/save/maps/basic2/map.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save/maps/basic2/metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/save/maps/basic2/metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save/maps/tiny/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/save/maps/tiny/map.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save/maps/tiny/metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/save/maps/tiny/metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/state.py" beforeDir="false" afterPath="$PROJECT_DIR$/state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/menus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/worlds.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,7 +199,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718106406982</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Level editor tools implemented, added tile assets">
+      <option name="closed" value="true" />
+      <created>1718355951751</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1718355951751</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Level editor tools implemented, added tile assets">
+      <option name="closed" value="true" />
+      <created>1718355962561</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1718355962561</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -216,6 +240,7 @@
     <MESSAGE value="Map select menu almost complete" />
     <MESSAGE value="Progress on level editor" />
     <MESSAGE value="Level editor map rendering, panning, tile highlight, tool selector" />
-    <option name="LAST_COMMIT_MESSAGE" value="Level editor map rendering, panning, tile highlight, tool selector" />
+    <MESSAGE value="Level editor tools implemented, added tile assets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Level editor tools implemented, added tile assets" />
   </component>
 </project>

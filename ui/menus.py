@@ -65,14 +65,20 @@ class MapSelectMenu(state.State):
             util.Button(util.ButtonType.NORMAL, Point(160, 1005), Point(150, 80),
                         util.TextSize.MINOR_BOLD.render("BACK", True, Colours.BLACK),
                         [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state]),  # Back button
-            util.Button(util.ButtonType.NORMAL, Point(H_CENTER, 1005), Point(190, 80),
+            util.Button(util.ButtonType.NORMAL, Point(700, 1005), Point(190, 80),
                         util.TextSize.MINOR_BOLD.render("GET MAPS", True, Colours.BLACK),
-                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state])  # Download maps button
+                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state]),  # Download maps button
+            util.Button(util.ButtonType.NORMAL, Point(920, 1005), Point(190, 80),
+                        util.TextSize.MINOR_BOLD.render("REFRESH", True, Colours.BLACK),
+                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.refresh_offline_maps]),  # Refresh map list button
+            util.Button(util.ButtonType.NORMAL, Point(1140, 1005), Point(190, 80),
+                        util.TextSize.MINOR_BOLD.render("CREATE MAP", True, Colours.BLACK),
+                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state]),  # Create map button
         ]
 
         # Buttons which need special processing are checked separately
         self.play_button = util.Button(util.ButtonType.NORMAL, Point(1760, 1005), Point(150, 80), util.TextSize.MINOR_BOLD.render("PLAY", True, Colours.BLACK), [Colours.BUTTON, Colours.BUTTON_HOVER], None, [])
-        self.edit_button = util.Button(util.ButtonType.NORMAL, Point(1560, 1005), Point(150, 80), util.TextSize.MINOR_BOLD.render("EDIT", True, Colours.BLACK), [Colours.BUTTON, Colours.BUTTON_HOVER], None, [])
+        self.edit_button = util.Button(util.ButtonType.NORMAL, Point(1580, 1005), Point(150, 80), util.TextSize.MINOR_BOLD.render("EDIT", True, Colours.BLACK), [Colours.BUTTON, Colours.BUTTON_HOVER], None, [])
 
         self.offline_maps = worlds.get_offline_map_list()
 
@@ -89,6 +95,12 @@ class MapSelectMenu(state.State):
         self.scrollbar_grabbed = False
         self.scrollbar_rect = None
         self.set_scrollbar_rect()
+
+    def on_enter(self):
+        self.refresh_offline_maps()
+
+    def refresh_offline_maps(self):
+        self.offline_maps = worlds.get_offline_map_list()
 
     def update(self, delta_time, events):
         # TODO: Test with a mouse scroll wheel
@@ -128,9 +140,15 @@ class MapSelectMenu(state.State):
 
         if self.selected_index is not None:
             if self.play_button.check(mouse_pos, clicked):
-                gameview.TestGameView(self.crtd, self.offline_maps[self.selected_index]).enter_state()
+                # gameview.TestGameView(self.crtd, self.offline_maps[self.selected_index]).enter_state()
+                pass
             if self.edit_button.check(mouse_pos, clicked) and self.offline_maps[self.selected_index].editable:
-                gameview.EditorView(self.crtd, self.offline_maps[self.selected_index]).enter_state()
+                loaded_map = worlds.load_map(self.crtd, self.offline_maps[self.selected_index], True)
+                if isinstance(loaded_map, str):
+                    print(loaded_map)
+                    # Set current info box to a messagebox with message of the above.
+                else:
+                    gameview.EditorView(self.crtd, loaded_map).enter_state()
 
         if self.scrollbar_grabbed:
             if pygame.mouse.get_pressed()[0]:

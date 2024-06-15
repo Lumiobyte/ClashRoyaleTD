@@ -30,6 +30,7 @@ class Crtd:
         self.frame_time = 0
 
         self.state_stack = [menus.HomeMenu(self)]
+        self.state_switch = False
 
         self.assets = AssetManager()
 
@@ -55,6 +56,9 @@ class Crtd:
 
         if self.state_stack:
             self.state_stack[-1].update(self.frame_time, events)
+
+            if self.state_switch:
+                self.state_stack[-1].on_enter()
 
         # State stack should never be empty
         else:

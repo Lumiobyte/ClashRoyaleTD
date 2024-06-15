@@ -58,13 +58,47 @@ def get_offline_map_list():
                 continue
 
         if 'thumb.png' not in files:
-            map_meta.set_thumb(pygame.image.load(DATA_DIR + '/maps/default_thumb.png').convert_alpha())
+            generate_map_thumbnail(map_meta)
+
+            if not os.path.exists(root + '/thumb.png'):
+                map_meta.set_thumb(pygame.image.load(DATA_DIR + '/maps/default_thumb.png').convert_alpha())
+            else:
+                map_meta.set_thumb(pygame.image.load(root + '/thumb.png').convert_alpha())
         else:
             map_meta.set_thumb(pygame.image.load(root + '/thumb.png').convert_alpha())
 
         offline_maps.append(map_meta)
 
     return offline_maps
+
+
+def generate_map_thumbnail(map_meta):
+    with open(map_meta.path + '/map.txt') as map_data:
+        lines = [line.strip('\n') for line in map_data.readlines()]
+
+    block_height = 300 / len(lines)
+    line_width = len(lines[0])
+    for line in lines:
+        if len(line) < line_width:
+            return  # This map is botched and isn't even a proper rectangle, don't bother continuing
+    block_width = 500 / line_width
+
+    thumb_surface = pygame.Surface((500, 300))  # 500x300 = standard thumbnail size
+    tile_type_colours = {TileType.NULL: Colours.DARK_GREEN, TileType.PATH: Colours.LIGHT_BROWN,
+                         TileType.PLACEABLE: Colours.LIGHT_YELLOW, TileType.START: Colours.BLUE, TileType.KING: Colours.RED}
+
+    top_left = Point(0, 0)
+    for line in lines:
+        for char in line:
+            tile_type = tile_types.get(char, None)
+            pygame.draw.rect(thumb_surface, tile_type_colours[tile_type] if tile_type else Colours.BLACK,
+                             pygame.Rect(*top_left.tuple(), block_width + 1, block_height + 1))
+
+            top_left.x += block_width
+        top_left.x = 0
+        top_left.y += block_height
+
+    pygame.image.save(thumb_surface, map_meta.path + '/thumb.png')
 
 
 def load_map(game, map_meta, editable=False):
@@ -236,6 +270,41 @@ class EditableMap(Map):
         self.movement_tally = Point(0, 0)
         self.grid_movement_tally = GridCoordinate(0, 0)
 
+        self.saved = True
+
+    def save_metadata(self, size=None):
+
+        with open(self.map_meta.path + '/metadata.json', 'r') as file:  # Load original to preserve "size" attribute
+            data = json.load(file)
+
+        data['name'] = self.map_meta.name
+        data['author'] = self.map_meta.author
+        if size is not None:
+            data['size'] = size
+        data['origin'] = 'editor'
+
+        with open(self.map_meta.path + '/metadata.json', 'w') as file:
+            json.dump(data, file)
+
+    def save_map(self):
+        if self.saved:
+            return
+
+        map_chars = []
+        for y in range(self.map_limit.y):  # Must invert iteration as self.tiles stores columns but data will be written row by row
+            row = ""
+            for x in range(self.map_limit.x):
+                row += tile_chars[self.tiles[x][y].tile_type]
+            map_chars.append(row + "\n")
+
+        with open(self.map_meta.path + '/map.txt', 'w') as file:
+            file.writelines(map_chars)
+
+        map_size = [self.map_limit.x, self.map_limit.y]
+        self.save_metadata(map_size)
+
+        generate_map_thumbnail(self.map_meta)  # Regenerate new thumbnail after changes
+
     def get_gridcoordinate(self, coordinate: Point):
         adjusted_coord = coordinate - self.viewport_topleft
 
@@ -245,6 +314,10 @@ class EditableMap(Map):
         return gc
 
     def create_tile(self, tile_loc, tile_type):
+
+        if self.saved:
+            self.saved = False
+
         new_tile = Tile(self.game.assets.get_tile_asset(tile_type), tile_type, tile_loc)
         new_tile.update_pos(self.viewport_topleft)
         new_tile.update_zoom(self.zoom)
@@ -253,6 +326,9 @@ class EditableMap(Map):
         return new_tile
 
     def set_tile(self, tile_loc, tile_type):
+
+        if self.saved:
+            self.saved = False
 
         # Determine whether to expand grid
         if tile_loc.x >= self.map_limit.x:
@@ -288,6 +364,10 @@ class EditableMap(Map):
                 tile.update_pos(self.viewport_topleft)
 
     def move_all(self, new_movement):
+
+        if self.saved:
+            self.saved = False
+
         self.movement_tally += new_movement
 
         # Update the lists so that the tiles are moved in the lists correctly
@@ -309,15 +389,22 @@ class EditableMap(Map):
             self.map_limit.x += 1
             self.grid_limit.x += 1
 
-        elif self.movement_tally.x <= -self.tile_size.x and self.grid_movement_tally.x > 0:  # Move left
+        elif self.movement_tally.x <= -self.tile_size.x and len(self.tiles) > 1:  # Move left
+
+            if self.grid_movement_tally.x <= 0:
+                for y in range(self.map_limit.y):
+                    if self.tiles[0][y].tile_type != TileType.NULL:
+                        self.attempt_subtract_right()
+                        return
+
             self.movement_tally.x += self.tile_size.x
             self.grid_movement_tally.x -= 1
-
-            self.update_all_gridcoordinates(GridCoordinate(-1, 0))
 
             for tile in self.tiles[0]:
                 self.spritegroup.remove(tile)
             self.tiles.pop(0)
+
+            self.update_all_gridcoordinates(GridCoordinate(-1, 0))
 
             self.map_limit.x -= 1
             self.grid_limit.x -= 1
@@ -335,18 +422,59 @@ class EditableMap(Map):
             self.map_limit.y += 1
             self.grid_limit.y += 1
 
-        elif self.movement_tally.y <= -self.tile_size.y and self.grid_movement_tally.y > 0:  # Move up
+        elif self.movement_tally.y <= -self.tile_size.y and len(self.tiles[0]) > 1:  # Move up
+
+            if self.grid_movement_tally.y <= 0:
+                for x in range(self.map_limit.x):
+                    if self.tiles[x][0].tile_type != TileType.NULL:
+                        self.attempt_subtract_bottom()
+                        return
+
             self.movement_tally.y += self.tile_size.y
             self.grid_movement_tally.y -= 1
-
-            self.update_all_gridcoordinates(GridCoordinate(0, -1))
 
             for x in range(self.map_limit.x):
                 self.spritegroup.remove(self.tiles[x][0])
                 self.tiles[x].pop(0)
 
+            self.update_all_gridcoordinates(GridCoordinate(0, -1))
+
             self.map_limit.y -= 1
             self.grid_limit.y -= 1
+
+    def attempt_subtract_right(self):
+
+        if self.grid_movement_tally.x <= 0:
+            for y in range(self.map_limit.y):
+                if self.tiles[self.map_limit.x - 1][y].tile_type != TileType.NULL:
+                    return
+
+        self.movement_tally.x += self.tile_size.x
+        self.grid_movement_tally.x -= 1
+
+        for tile in self.tiles[self.map_limit.x - 1]:
+            self.spritegroup.remove(tile)
+        self.tiles.pop(self.map_limit.x - 1)
+
+        self.map_limit.x -= 1
+        self.grid_limit.x -= 1
+
+    def attempt_subtract_bottom(self):
+
+        if self.grid_movement_tally.y <= 0:
+            for x in range(self.map_limit.x):
+                if self.tiles[x][self.map_limit.y - 1].tile_type != TileType.NULL:
+                    return
+
+        self.movement_tally.y += self.tile_size.y
+        self.grid_movement_tally.y -= 1
+
+        for x in range(self.map_limit.x):
+            self.spritegroup.remove(self.tiles[x][self.map_limit.y - 1])
+            self.tiles[x].pop(self.map_limit.y - 1)
+
+        self.map_limit.y -= 1
+        self.grid_limit.y -= 1
 
     def render_grid(self, surface, colour):
 

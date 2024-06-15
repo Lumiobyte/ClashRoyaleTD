@@ -9,6 +9,13 @@ image_ext = ('.png', '.jpg')
 sound_ext = ('.wav', '.ogg', '.mp3')
 
 
+def first_time_setup():
+    pass
+
+    # If not exists save/maps, save/ongoing - create them .
+    # Everything else will be bundled into the exe
+
+
 class AssetManager:
     def __init__(self, path=ASSETS_DIR+"auto/"):
         self.path = path

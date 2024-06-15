@@ -65,4 +65,6 @@ class TileType(enum.Enum):
 
 
 tile_types = {'.': TileType.NULL, 'S': TileType.START, '#': TileType.PATH, 'P': TileType.PLACEABLE, 'K': TileType.KING}
+tile_chars = {TileType.NULL: '.', TileType.START: 'S', TileType.PATH: '#', TileType.PLACEABLE: 'P', TileType.KING: 'K'}
+
 

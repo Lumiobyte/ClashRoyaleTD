@@ -54,10 +54,11 @@ class TestGameView(state.State):
 
 
 class EditorView(state.State):
-    def __init__(self, game, map_meta):
+    def __init__(self, game, loaded_map):
         state.State.__init__(self, game)
 
-        self.game_map = worlds.load_map(game, map_meta, True)
+        self.game_map = loaded_map
+
 
         self.buttons = [
             util.Button(util.ButtonType.NORMAL, Point(1740, 560), Point(200, 80),
@@ -86,11 +87,11 @@ class EditorView(state.State):
 
 
             util.Button(util.ButtonType.NORMAL, Point(1740, 805), Point(200, 80),
-                        util.TextSize.MINOR_BOLD.render("VERIFY", True, Colours.BLACK),
+                        util.TextSize.MINOR_BOLD.render("PROPERTIES", True, Colours.BLACK),
                         [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state]),  # Verify button
             util.Button(util.ButtonType.NORMAL, Point(1740, 905), Point(200, 80),
                         util.TextSize.MINOR_BOLD.render("SAVE", True, Colours.BLACK),
-                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state]),  # Save button
+                        [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.attempt_save_map]),  # Save button
             util.Button(util.ButtonType.NORMAL, Point(1740, 1005), Point(200, 80),
                         util.TextSize.MINOR_BOLD.render("EXIT", True, Colours.BLACK),
                         [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state]),  # Exit button
@@ -99,6 +100,7 @@ class EditorView(state.State):
                         [Colours.BUTTON, Colours.BUTTON_HOVER], None, [self.exit_state]),  # Help button
 
         ]
+
 
         self.map_grabbed = False
 
@@ -110,6 +112,12 @@ class EditorView(state.State):
             self.tool_selected = None
         else:
             self.tool_selected = tool
+
+    def attempt_save_map(self):
+        # Run map verify
+        # If fails, show infobox
+        # If map not named, fail and show infobox
+        self.game_map.save_map()
 
     def update(self, delta_time, events):
 
